@@ -3,104 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Política de Privacidad - ¿Desea Factura?</title>
+    <title>¿Desea Factura? - Extensión de Checkout</title>
+    <script src="https://unpkg.com/@shopify/app-bridge@3"></script>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
             color: #333;
-            background-color: #f8f9fa;
-            margin: 0;
-            padding: 20px;
+            background-color: #f9f9f9;
         }
+        
         .container {
             max-width: 800px;
             margin: 0 auto;
-            background-color: #ffffff;
-            padding: 30px;
+            padding: 20px;
+        }
+        
+        .header {
+            background: white;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
         }
-        h1, h2 {
-            color: #212529;
-            border-bottom: 1px solid #dee2e6;
-            padding-bottom: 10px;
+        
+        .header h1 {
+            color: #2c5aa0;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
         }
-        .highlight {
-            background-color: #eaf7ff;
-            border-left: 4px solid #007bff;
+        
+        .header p {
+            color: #666;
+            font-size: 1.2rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .card h2 {
+            color: #2c5aa0;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .card p {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .feature-list li:before {
+            content: "✓";
+            color: #28a745;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .status {
+            background: #d4edda;
+            color: #155724;
             padding: 15px;
-            margin: 20px 0;
-            border-radius: 4px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #c3e6cb;
         }
-        p, li {
-            color: #495057;
+        
+        .instructions {
+            background: #e2e3e5;
+            padding: 20px;
+            border-radius: 5px;
+            border-left: 4px solid #2c5aa0;
         }
-        a {
-            color: #007bff;
-            text-decoration: none;
+        
+        .instructions h3 {
+            margin-bottom: 10px;
+            color: #2c5aa0;
         }
-        a:hover {
-            text-decoration: underline;
+        
+        .instructions ol {
+            padding-left: 20px;
         }
-        strong {
-            color: #212529;
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .version {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-
     <div class="container">
-        <h1>Política de Privacidad de ¿Desea Factura?</h1>
-        <p><strong>Última actualización:</strong> 21 de junio de 2025</p>
-
-        <h2>1. Nuestra Filosofía: Cero Datos del Cliente</h2>
-        <p>
-            Bienvenido a ¿Desea Factura? (la "Aplicación"), proporcionada por <strong>Benito</strong> ("nosotros", "nuestro").
-        </p>
-        <p>
-            Nuestra Aplicación ha sido diseñada con la máxima privacidad y seguridad como prioridad. Es una aplicación puramente de frontend, lo que significa que <strong>no tenemos un servidor backend que recopile, vea, almacene o procese cualquier tipo de información personal introducida por los clientes finales</strong> en el checkout de Shopify.
-        </p>
-        <div class="highlight">
-            <p>
-                <strong>En resumen:</strong> La información de facturación de sus clientes (como nombre, dirección o RUT) es manejada exclusivamente por el sistema seguro de Shopify. Nosotros nunca tenemos acceso a ella.
-            </p>
+        <div class="header">
+            <h1>¿Desea Factura?</h1>
+            <p>Extensión de checkout para recopilar información de facturación</p>
         </div>
-
-        <h2>2. Información que Recopilamos del Comerciante</h2>
-        <p>
-            Para que la Aplicación funcione y para poder brindarle soporte, Shopify nos proporciona información limitada sobre usted, el Comerciante, cuando instala la aplicación:
-        </p>
-        <ul>
-            <li>Su nombre e información de contacto (como el correo electrónico).</li>
-            <li>El nombre y la URL de su tienda Shopify.</li>
-        </ul>
-        <p>Utilizamos esta información exclusivamente para comunicarnos con usted acerca de la Aplicación, para facturación (si aplica) y para soporte técnico.</p>
-
-        <h2>3. Cómo Funciona la Aplicación</h2>
-        <p>
-            Nuestra Aplicación utiliza las herramientas de interfaz de Shopify (Checkout UI Extensions) para agregar campos visibles en la página de pago. Cuando un cliente final introduce su información de facturación en estos campos:
-        </p>
-        <ul>
-            <li>Los datos se transmiten <strong>directamente y de forma segura a los servidores de Shopify</strong>.</li>
-            <li>Los datos se adjuntan a los detalles del pedido dentro de su propio panel de Shopify.</li>
-            <li>Nuestros sistemas nunca interceptan, guardan o procesan esta información.</li>
-        </ul>
-
-        <h2>4. Seguridad y Retención de Datos</h2>
-        <p>
-            Dado que no recopilamos ni almacenamos datos personales de los clientes finales, los riesgos de seguridad asociados a nuestra Aplicación son mínimos. La seguridad de los datos de sus clientes está en manos de la robusta infraestructura de Shopify.
-        </p>
-        <p>
-            La información que recopilamos sobre usted, el Comerciante, se mantiene segura y se conserva únicamente mientras tenga la Aplicación instalada, para fines de soporte y facturación.
-        </p>
         
-        <h2>5. Cambios en Nuestra Política de Privacidad</h2>
-        <p>
-            Podemos actualizar esta política si la funcionalidad de nuestra aplicación cambia. Si los cambios son significativos, se lo notificaremos a través de la información de contacto que nos proporcionó al instalar la aplicación.
-        </p>
-
+        <div class="status">
+            <strong>✅ Aplicación instalada correctamente</strong><br>
+            La extensión está activa y funcionando en tu tienda.
+        </div>
+        
+        <div class="card">
+            <h2>¿Qué hace esta extensión?</h2>
+            <p>Esta extensión agrega una pregunta en el checkout de tu tienda para que los clientes puedan solicitar una factura y proporcionar sus datos fiscales.</p>
+            
+            <h3 style="margin-top: 20px; margin-bottom: 10px;">Características:</h3>
+            <ul class="feature-list">
+                <li>Pregunta "¿Desea factura?" en el checkout</li>
+                <li>Recopila RUT de la empresa</li>
+                <li>Recopila razón social de la empresa</li>
+                <li>Guarda la información como atributos del pedido</li>
+                <li>Completamente automática, sin configuración adicional</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h2>Cómo funciona</h2>
+            <div class="instructions">
+                <h3>Para tus clientes:</h3>
+                <ol>
+                    <li>Durante el checkout, verán la pregunta "¿Desea factura?"</li>
+                    <li>Si marcan "Sí", aparecerán campos para RUT y razón social</li>
+                    <li>Completan la información y finalizan la compra</li>
+                </ol>
+                
+                <h3>Para ti como comerciante:</h3>
+                <ol>
+                    <li>Ve a tus pedidos en el admin de Shopify</li>
+                    <li>Los datos de facturación aparecen en los atributos del pedido</li>
+                    <li>Busca: "solicitudFactura", "rutEmpresa", "razonSocial"</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>Información técnica</h2>
+            <p><strong>Tipo:</strong> Extensión de UI de Checkout</p>
+            <p><strong>Ubicación:</strong> Después de la dirección de entrega</p>
+            <p><strong>Idiomas soportados:</strong> Español, Inglés, Francés</p>
+            
+            <div class="version">
+                <strong>Versión de API:</strong> 2025-04<br>
+                <strong>Tipo de extensión:</strong> ui_extension<br>
+                <strong>Target:</strong> purchase.checkout.delivery-address.render-after
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>Soporte</h2>
+            <p>Si tienes alguna pregunta o necesitas ayuda con esta extensión:</p>
+            <ul style="margin-top: 10px;">
+                <li>📧 Email: <a href="mailto:support@desea-factura.com">support@desea-factura.com</a></li>
+                <li>🐛 Reportar problemas: <a href="https://github.com/benitogonzalezh/desea-factura/issues" target="_blank">GitHub Issues</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer">
+            <p>&copy; 2024 Desea Factura. Desarrollado para facilitar la facturación en Shopify.</p>
+        </div>
     </div>
 
+    <script>
+        // Verificar si estamos en el contexto de Shopify
+        const urlParams = new URLSearchParams(window.location.search);
+        const isEmbedded = urlParams.has('embedded') || urlParams.has('host');
+        
+        if (isEmbedded && window['app-bridge']) {
+            // Inicializar App Bridge para aplicaciones incrustadas
+            const AppBridge = window['app-bridge'];
+            const app = AppBridge.createApp({
+                apiKey: 'd2e9983dee441556879f56d038f41737',
+                host: urlParams.get('host') || '',
+                forceRedirect: true
+            });
+            
+            // Configurar navegación
+            const TitleBar = AppBridge.actions.TitleBar;
+            const titleBar = TitleBar.create(app, {
+                title: '¿Desea Factura?',
+            });
+            
+            console.log('✅ App Bridge inicializado correctamente');
+        } else {
+            console.log('ℹ️ Ejecutándose fuera del contexto de Shopify');
+        }
+        
+        // Función para manejar autenticación si es necesario
+        window.handleAuth = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get('code');
+            const shop = urlParams.get('shop');
+            
+            if (code && shop) {
+                console.log('🔐 Procesando autenticación OAuth...');
+                // Aquí manejarías el intercambio de código por token si fuera necesario
+                // Para extensiones simples, generalmente no es requerido
+            }
+        };
+        
+        // Ejecutar cuando la página cargue
+        document.addEventListener('DOMContentLoaded', function() {
+            window.handleAuth();
+            console.log('✅ Página cargada correctamente');
+        });
+    </script>
 </body>
 </html>
