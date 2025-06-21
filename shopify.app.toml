@@ -1,0 +1,28 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "d2e9983dee441556879f56d038f41737"
+name = "desea-factura"
+handle = "desea-factura"
+application_url = "https://benitogonzalezh.github.io/desea-factura/"
+embedded = false
+
+[build]
+include_config_on_deploy = true
+
+[webhooks]
+api_version = "2025-04"
+
+# ✅ Webhooks GDPR obligatorios
+[[webhooks.subscriptions]]
+compliance_topics = ["customers/data_request", "customers/redact", "shop/redact"]
+uri = "https://webhooks-worker.desea-factura.workers.dev/webhooks"
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = ""
+
+[auth]
+redirect_urls = [ "https://benitogonzalezh.github.io/desea-factura/" ]
+
+[pos]
+embedded = false

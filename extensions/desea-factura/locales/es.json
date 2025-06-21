@@ -1,0 +1,9 @@
+{
+  "welcome": "¡Bienvenido a la extensión {{target}}!",
+  "iWouldLikeAFreeGiftWithMyOrder": "Me gustaría recibir un regalo gratis con mi pedido",
+  "addAFreeGiftToMyOrder": "Agregar un regalo gratis a mi pedido",
+  "attributeChangesAreNotSupported": "Los cambios de atributos no son compatibles en este checkout",
+  "wouldYouLikeAnInvoice": "¿Desea factura?",
+  "companyRut": "RUT de la empresa",
+  "companyName": "Razón social"
+} 
